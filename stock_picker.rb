@@ -7,7 +7,7 @@ def stock_picker(prices)
       # puts "X: #{x} Z: #{z} X-Z $#{z-x}"
       if ( (z-x) > max_proceeds )
         max_proceeds = z - x
-        best_combination = [place_count, prices[place_count...].find_index(z)]
+        best_combination = [place_count, prices.find_index(z)]
       end
     end
     place_count += 1
