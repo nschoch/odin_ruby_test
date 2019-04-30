@@ -1,3 +1,38 @@
+
+class Array
+  def my_each(some_method)
+    i = 0
+    while i < self.size
+      some_method.call(self[i])
+      i+=1
+    end
+    self
+  end
+end
+
+def print_stuff(word)
+  print "#{word}"
+end
+
+[1,2,3].my_each(method(:print_stuff)).inspect
+
+# https://www.eriktrautman.com/posts/ruby-explained-blocks-procs-and-lambdas-aka-closures
+# class Array
+#   def my_each
+#     i = 0
+#     while i < self.size
+#       yield(self[i]) if block_given? 
+#       i += 1
+#     end
+#     self
+#   end
+# end
+
+# dudes = ["Mike", "Bob", "Joe"]
+# dudes.my_each { |num| print "#{num}"}
+
+# dudes.my_each
+
 # Program Logger. Write a method called log, which takes a string description of a
 #  block and, of course, a block. Similar to  doSelfImportantly, it should puts a 
 #  string telling that it has started the block, and another string at the end telling 
@@ -13,18 +48,18 @@
 # ..."yet another block" finished, returning:  I like Thai food!
 # ..."outer block" finished, returning:  false
 
-def log (descriptionOfBlock, &block)
-    puts "starting block: #{descriptionOfBlock}"
-    value_returned = block.call
-    puts "finished block #{descriptionOfBlock}"
-    puts value_returned
-end
+# def log (descriptionOfBlock, &block)
+#     puts "starting block: #{descriptionOfBlock}"
+#     value_returned = block.call
+#     puts "finished block #{descriptionOfBlock}"
+#     puts value_returned
+# end
 
-log ('outer block') do
-    log ('inner block') {
-         5
-    }
-end
+# log ('outer block') do
+#     log ('inner block') {
+#          5
+#     }
+# end
 
 
 # def log block_description, &block
