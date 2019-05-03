@@ -1,20 +1,119 @@
+class BaseballPlayer
+  attr_accessor :hits, :walks, :at_bats
+  def initialize(hits, walks, at_bats)
+    @hits = hits
+    @walks = walks
+    @at_bats = at_bats
+  end
+  
+  def batting_average
+    return @hits.to_f/@at_bats
+  end
 
-class Array
-  def my_each(some_method)
-    i = 0
-    while i < self.size
-      some_method.call(self[i])
-      i+=1
-    end
-    self
+  def on_base_percentage
+    return (@hits + @walks).to_f/@at_bats
   end
 end
 
-def print_stuff(word)
-  print "#{word}"
-end
+rodrigo = BaseballPlayer.new(10, 4, 50)
+puts rodrigo.batting_average
+puts rodrigo.on_base_percentage
+puts rodrigo.hits
 
-[1,2,3].my_each(method(:print_stuff)).inspect
+# require 'open-uri'
+# remote_base_url = "http://en.wikipedia.org/wiki"
+
+# [1900, 1910, 'xj3490', 2000].each do |yr|
+ 
+#  retries = 3
+ 
+#  begin
+#    url = "#{remote_base_url}/#{yr}"
+#    puts "Getting page #{url}"
+#    rpage = open(url)
+#  rescue StandardError=>e
+#    puts "\tError: #{e}"
+#    if retries > 0
+#        puts "\tTrying #{retries} more times"
+#        retries -= 1
+#        sleep 1
+#        retry
+#    else
+#        puts "\t\tCan't get #{yr}, so moving on"
+#    end    
+#  else
+#    puts "\tGot page for #{yr}"
+#  ensure   
+#    puts "Ensure branch; sleeping"
+#    sleep 1
+
+#  end
+# end
+
+# a = 10
+# b = 43
+
+# begin
+#   a + b
+
+# rescue
+#   puts "Could not add variables a (#{a.class}) and b (#{b.class})."
+# else
+#   puts "a + b is #{a + b}"
+# end
+
+# class Viking
+#   def initialize(name, health, age, strength)
+#       #... set variables
+#       @name = name
+#       @health = health
+#       @age = age
+#       @strength = strength
+#   end
+#   def self.create_warrior(name)
+#       age = rand * 20 + 15   # remember, rand gives a random 0 to 1
+#       health = [age * 5, 120].min
+#       strength = [age / 2, 10].min
+#       Viking.new(name, health, age, strength)  # returned
+#   end
+
+#   def self.random_name
+#     ["Erik", "Lars", "Leif"].sample
+#   end
+
+#   def self.silver_to_gold(silver_pieces)
+#     silver_pieces/10
+#   end
+
+#   class << self
+#     def gold_to_silver(gold_pieces)
+#       gold_pieces * 10
+#     end
+#   end
+# end
+
+# sten = Viking.create_warrior('Sten')
+# puts sten.inspect()
+# warrior1 = Viking.create_warrior(Viking.random_name)
+# puts warrior1.inspect()
+
+
+# class Array
+#   def my_each(some_method)
+#     i = 0
+#     while i < self.size
+#       some_method.call(self[i])
+#       i+=1
+#     end
+#     self
+#   end
+# end
+
+# def print_stuff(word)
+#   print "#{word}"
+# end
+
+# [1,2,3].my_each(method(:print_stuff)).inspect
 
 # https://www.eriktrautman.com/posts/ruby-explained-blocks-procs-and-lambdas-aka-closures
 # class Array
