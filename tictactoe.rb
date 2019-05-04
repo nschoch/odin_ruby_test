@@ -143,6 +143,6 @@ class Game
   end
 end
 
-first_player = Player.new('Jenna')
+first_player = Player.new('Luka')
 second_player = Player.new('Brody')
 new_game = Game.new(first_player, second_player)
