@@ -1,4 +1,6 @@
 class Board
+  attr_reader :row_data
+
   def initialize(row_count, num_of_spaces=4)
     @row_count = row_count.to_i
     @num_of_spaces = num_of_spaces.to_i
@@ -58,6 +60,16 @@ class Robot
   def say_hi(player_name)
     puts "Robot: Hi #{player_name}!"
   end
+
+  def guess(board, colors, num_of_colors)
+    guess = []
+    num_of_colors.times do |i|
+      guess << colors.sample
+    end
+    guess = guess.join
+    puts "I'm not sure. How about #{guess}?"
+    return guess
+  end
 end
 
 class Player
@@ -82,6 +94,21 @@ class Game
     puts "You will be playing against a robot. Say 'hi' robot."
     @robot = Robot.new
     @robot.say_hi(@player.name)
+
+    puts "Who should guess? Robot (1) or you (2)?"
+    response = gets.chomp.to_i
+    while (response != 1 && response != 2)
+      puts "I need a 1 or a 2"
+      response = gets.chomp.to_i
+    end
+
+    if response == 1
+      puts "OK, Robot will guess."
+      @game_type = "robot"
+    else
+      puts "OK, you will guess."
+      @game_type = "player"
+    end
 
     puts "How many attempts?"
     @desired_attempts = gets.chomp.to_i
@@ -111,8 +138,11 @@ class Game
 
       until game_over
         attempt_count += 1
-        puts "Guess what colors and order"
-        guess = gets.chomp.upcase.split('')
+        puts "Guess what colors (#{@colors.join()}) and order"
+        guess = @game_type == 'player' ? gets.chomp : @robot.guess(@board, @colors, @num_of_colors)
+        guess = guess.upcase.split('')
+
+        puts "Guess #{guess}"
         exist = 0
         ordered = 0
         code_temp = @code.dup
@@ -127,7 +157,7 @@ class Game
         end
         @board.add_attempt({ :attempt => attempt_count, :guess => guess, :exist => exist, :ordered => ordered })
         if guess == @code
-          puts "You guessed it"
+          puts "You figured it out!"
           game_over = true
         elsif (attempt_count+1 > @desired_attempts)
           puts "You didn't get it this time."
@@ -140,7 +170,7 @@ class Game
       end
 
       puts "Play again?"
-      if (gets.chomp != "Y")
+      if (gets.chomp.upcase != "Y")
         exit_game = true
       else
         game_over = false
