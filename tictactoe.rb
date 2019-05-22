@@ -64,7 +64,11 @@ end
 
 class Player
   attr_reader :name
-  def initialize(name)
+  def initialize(name=nil)
+    while name.nil?
+      puts "Input name for player"
+      name = gets.chomp
+    end
     @name = name
     @score = 0
   end
@@ -83,11 +87,11 @@ class Player
 end
 
 class Game
-  def initialize(player1, player2)
-    @player1 = player1
-    @player2 = player2
+  def initialize(player1=nil, player2=nil, test_mode = nil)
+    @player1 = player1.nil? ? Player.new : player1
+    @player2 = player2.nil? ? Player.new : player2
     puts "Game initialized with #{@player1.name} and #{@player2.name}!"
-    play_game
+    play_game if test_mode.nil?
   end
 
   def play_game
@@ -143,6 +147,4 @@ class Game
   end
 end
 
-first_player = Player.new('Luka')
-second_player = Player.new('Brody')
-new_game = Game.new(first_player, second_player)
+# new_game = Game.new

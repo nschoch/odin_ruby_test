@@ -4,7 +4,7 @@ def caesar_cipher(message='Need a message', shift=1)
   newMessage = message.strip.chars.map do |c|
     char_conversion(c, shift)
   end
-  puts newMessage.join
+  newMessage.join
 end
 
 def char_conversion(char, shift)
@@ -32,6 +32,7 @@ def char_conversion(char, shift)
   target_new_char.chr
 end
 
-caesar_cipher('What a string!', 5)
+puts caesar_cipher('What a string!', 5)
+puts caesar_cipher('abcd',1)
 # puts char_conversion('c',1).inspect
 
