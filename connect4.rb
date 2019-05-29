@@ -1,6 +1,6 @@
 class Board
   attr_reader :grid
-  def initialize
+  def initialize 
     @grid = [['_','_','_','_','_','_','_'],
              ['_','_','_','_','_','_','_'],
              ['_','_','_','_','_','_','_'],
