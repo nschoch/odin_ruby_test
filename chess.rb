@@ -24,7 +24,7 @@ class Board
     @pieces << Pawn.new([2,6], 'black')
     @pieces << Pawn.new([2,7], 'black')
     @pieces << Pawn.new([2,8], 'black')
-    @pieces << Rook.new([1,1],'white')
+    @pieces << Rook.new([8,1],'white')
     @pieces << Knight.new([8,2], 'white')
     @pieces << Bishop.new([8,3], 'white')
     @pieces << Queen.new([8,4], 'white')
@@ -49,6 +49,20 @@ class Board
       true
     else
       false
+    end
+  end
+
+  def showboard
+    count = 1
+    until count == 9
+      row_string = ''
+      @pieces.each do |x|
+        if x.pos[0] == count
+          row_string += x.display
+        end
+      end
+      puts row_string
+      count += 1
     end
   end
 
@@ -78,7 +92,7 @@ class Pawn < Piece
     @pos = pos
     @team = team
     @type = 'pawn'
-    @display_black = "\u265f"
+    @display_black = "\u265F"
     @display_white = "\u2659"
   end
 
