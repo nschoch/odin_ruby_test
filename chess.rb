@@ -36,9 +36,9 @@ end
 
 class Pawn < Piece
 
-  def initialize(pos=[0,0])
-    super(pos)
-    super(team)
+  def initialize(pos=[0,0], team='black')
+    @pos = pos
+    @team = team
     @type = 'pawn'
   end
 
@@ -49,45 +49,45 @@ end
 
 class Rook < Piece
 
-  def initialize(pos=[0,0])
-    super(pos)
-    super(team)
+  def initialize(pos=[0,0], team='black')
+    @pos = pos
+    @team = team
     @type = 'rook'
   end
 end
 
 class Knight < Piece
 
-  def initialize(pos=[0,0])
-    super(pos)
-    super(team)
+  def initialize(pos=[0,0], team='black')
+    @pos = pos
+    @team = team
     @type = 'knight'
   end
 end
 
 class Bishop < Piece
 
-  def initialize(pos=[0,0])
-    super(pos)
-    super(team)
+  def initialize(pos=[0,0], team='black')
+    @pos = pos
+    @team = team
     @type = 'bishop'
   end
 end
 
 class Queen < Piece
 
-  def initialize(pos=[0,0])
-    super(pos)
-    super(team)
+  def initialize(pos=[0,0], team='black')
+    @pos = pos
+    @team = team
     @type = 'queen'
   end
 end
 
 class King < Piece
 
-  def initialize(pos=[0,0])
-    super(pos)
-    super(team)
+  def initialize(pos=[0,0], team='black')
+    @pos = pos
+    @team = team
     @type = 'king'
   end
 end

@@ -17,7 +17,7 @@ describe Board do
     it 'confirms 8,8 is valid' do
       a = Board.new
       expect(a.valid_space([8,8])).to eql(true)
-  end
+    end
     it 'confirms 9,8 is invalid' do
       a = Board.new
       expect(a.valid_space([9,8])).to eql(false)
@@ -30,7 +30,7 @@ describe Piece do
   describe '#announce' do
     it 'announces the piece type and position' do
       a = Piece.new
-      expect(a.announce).to eql('I am a undefined. I am located at [0, 0].')
+      expect(a.announce).to eql('I am a black undefined. I am located at [0, 0].')
     end
   end
 end
@@ -39,7 +39,7 @@ describe Pawn do
   describe '#announce' do
     it 'announces that it is a pawn with a base location' do
       a = Pawn.new
-      expect(a.announce).to eql('I am a pawn. I am located at [0, 0].')
+      expect(a.announce).to eql('I am a black pawn. I am located at [0, 0].')
     end
   end
 
