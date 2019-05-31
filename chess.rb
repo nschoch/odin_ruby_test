@@ -2,6 +2,22 @@ class Game
 end
 
 class Board
+
+  def initialize
+    @width = 8
+    @length = 8
+  end
+
+  def valid_space(desired_loc)
+    col = desired_loc[1]
+    row = desired_loc[0]
+    if col >= 1 and col <= 8 and row >= 1 and row <= 8
+      true
+    else
+      false
+    end
+  end
+  
 end
 
 class Piece
