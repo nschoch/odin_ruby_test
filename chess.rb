@@ -56,6 +56,8 @@ class Rook < Piece
     @pos = pos
     @team = team
     @type = 'rook'
+    @display_black = "\u265c"
+    @display_white = "\u2656"
   end
 
 end
@@ -66,6 +68,8 @@ class Knight < Piece
     @pos = pos
     @team = team
     @type = 'knight'
+    @display_black = "\u265e"
+    @display_white = "\u2658"
   end
 end
 
@@ -75,6 +79,8 @@ class Bishop < Piece
     @pos = pos
     @team = team
     @type = 'bishop'
+    @display_black = "\u265d"
+    @display_white = "\u2657"
   end
 end
 
@@ -84,6 +90,8 @@ class Queen < Piece
     @pos = pos
     @team = team
     @type = 'queen'
+    @display_black = "\u265b"
+    @display_white = "\u2655"
   end
 end
 
@@ -93,6 +101,8 @@ class King < Piece
     @pos = pos
     @team = team
     @type = 'king'
+    @display_black = "\u265a"
+    @display_white = "\u2654"
   end
 end
 
