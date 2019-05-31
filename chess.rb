@@ -53,17 +53,28 @@ class Board
   end
 
   def showboard
-    count = 1
-    until count == 9
-      row_string = ''
-      @pieces.each do |x|
-        if x.pos[0] == count
-          row_string += x.display
+    row_count = 1
+    until row_count == 9
+      col_count = 1
+      row_string = "#{row_count} "
+      until col_count == 9
+        piece_present = false
+        @pieces.each do |piece|
+          if piece.pos[0] == row_count and piece.pos[1] == col_count
+            row_string += piece.display
+            piece_present = true
+            break
+          end
         end
+        if piece_present == false
+          row_string += "\u26F6 "
+        end
+        col_count += 1
       end
       puts row_string
-      count += 1
+      row_count += 1
     end
+    puts "  A B C D E F G H"
   end
 
 end
@@ -82,7 +93,7 @@ class Piece
   end
 
   def display
-    @team == 'black' ? @display_black.encode('utf-8') : @display_white.encode('utf-8')
+    @team == 'black' ? @display_black : @display_white
   end
 end
 
@@ -93,7 +104,7 @@ class Pawn < Piece
     @team = team
     @type = 'pawn'
     @display_black = "\u265F"
-    @display_white = "\u2659"
+    @display_white = "\u2659 "
   end
 
 end
@@ -104,8 +115,8 @@ class Rook < Piece
     @pos = pos
     @team = team
     @type = 'rook'
-    @display_black = "\u265c"
-    @display_white = "\u2656"
+    @display_black = "\u265c "
+    @display_white = "\u2656 "
   end
 
 end
@@ -116,8 +127,8 @@ class Knight < Piece
     @pos = pos
     @team = team
     @type = 'knight'
-    @display_black = "\u265e"
-    @display_white = "\u2658"
+    @display_black = "\u265e "
+    @display_white = "\u2658 "
   end
 end
 
@@ -127,8 +138,8 @@ class Bishop < Piece
     @pos = pos
     @team = team
     @type = 'bishop'
-    @display_black = "\u265d"
-    @display_white = "\u2657"
+    @display_black = "\u265d "
+    @display_white = "\u2657 "
   end
 end
 
@@ -138,8 +149,8 @@ class Queen < Piece
     @pos = pos
     @team = team
     @type = 'queen'
-    @display_black = "\u265b"
-    @display_white = "\u2655"
+    @display_black = "\u265b "
+    @display_white = "\u2655 "
   end
 end
 
@@ -149,8 +160,8 @@ class King < Piece
     @pos = pos
     @team = team
     @type = 'king'
-    @display_black = "\u265a"
-    @display_white = "\u2654"
+    @display_black = "\u265a "
+    @display_white = "\u2654 "
   end
 end
 
