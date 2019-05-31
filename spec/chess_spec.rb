@@ -4,6 +4,26 @@ describe Board do
   describe '#showboard' do
     it 'shows the blank board'
   end
+
+  describe '#valid_space' do
+    it 'confirms 1,1 is a valid space' do
+      a = Board.new
+      expect(a.valid_space([1,1])).to eql(true)
+    end
+    it 'confirms 0,0 is invalid' do
+      a = Board.new
+      expect(a.valid_space([0,0])).to eql(false)
+    end
+    it 'confirms 8,8 is valid' do
+      a = Board.new
+      expect(a.valid_space([8,8])).to eql(true)
+  end
+    it 'confirms 9,8 is invalid' do
+      a = Board.new
+      expect(a.valid_space([9,8])).to eql(false)
+    end
+
+  end
 end
 
 describe Piece do

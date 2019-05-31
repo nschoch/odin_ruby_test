@@ -17,7 +17,7 @@ class Board
       false
     end
   end
-  
+
 end
 
 class Piece
@@ -47,18 +47,43 @@ class Pawn < Piece
 end
 
 class Rook < Piece
+
+  def initialize(pos=[0,0])
+    super(pos)
+    @type = 'rook'
+  end
 end
 
 class Knight < Piece
+
+  def initialize(pos=[0,0])
+    super(pos)
+    @type = 'knight'
+  end
 end
 
 class Bishop < Piece
+
+  def initialize(pos=[0,0])
+    super(pos)
+    @type = 'bishop'
+  end
 end
 
 class Queen < Piece
+
+  def initialize(pos=[0,0])
+    super(pos)
+    @type = 'queen'
+  end
 end
 
 class King < Piece
+
+  def initialize(pos=[0,0])
+    super(pos)
+    @type = 'king'
+  end
 end
 
 
