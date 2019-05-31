@@ -32,6 +32,10 @@ class Piece
   def announce
     return "I am a #{@team} #{@type}. I am located at #{@pos.to_s}."
   end
+
+  def display
+    @team == 'black' ? @display_black.encode('utf-8') : @display_white.encode('utf-8')
+  end
 end
 
 class Pawn < Piece
@@ -40,9 +44,8 @@ class Pawn < Piece
     @pos = pos
     @team = team
     @type = 'pawn'
-  end
-
-  def available_moves
+    @display_black = "\u265f"
+    @display_white = "\u2659"
   end
 
 end
@@ -54,6 +57,7 @@ class Rook < Piece
     @team = team
     @type = 'rook'
   end
+
 end
 
 class Knight < Piece

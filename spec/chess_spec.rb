@@ -43,6 +43,13 @@ describe Pawn do
     end
   end
 
+  describe '#display' do
+    it 'shows a black pawn by default' do
+      a = Pawn.new
+      expect(a.display).to eql("\u265f".encode('utf-8'))
+    end
+  end
+
   describe '#available_moves' do
   end 
 end
