@@ -21,16 +21,16 @@ class Board
 end
 
 class Piece
-  attr_reader :pos
+  attr_reader :pos, :team, :type
 
-  def initialize(pos=[0,0])
+  def initialize(pos=[0,0], team='black')
     @pos = pos
+    @team = team
     @type = 'undefined'
-    @frog = 'frog'
   end
 
   def announce
-    return "I am a #{@type}. I am located at #{@pos.to_s}."
+    return "I am a #{@team} #{@type}. I am located at #{@pos.to_s}."
   end
 end
 
@@ -38,6 +38,7 @@ class Pawn < Piece
 
   def initialize(pos=[0,0])
     super(pos)
+    super(team)
     @type = 'pawn'
   end
 
@@ -50,6 +51,7 @@ class Rook < Piece
 
   def initialize(pos=[0,0])
     super(pos)
+    super(team)
     @type = 'rook'
   end
 end
@@ -58,6 +60,7 @@ class Knight < Piece
 
   def initialize(pos=[0,0])
     super(pos)
+    super(team)
     @type = 'knight'
   end
 end
@@ -66,6 +69,7 @@ class Bishop < Piece
 
   def initialize(pos=[0,0])
     super(pos)
+    super(team)
     @type = 'bishop'
   end
 end
@@ -74,6 +78,7 @@ class Queen < Piece
 
   def initialize(pos=[0,0])
     super(pos)
+    super(team)
     @type = 'queen'
   end
 end
@@ -82,6 +87,7 @@ class King < Piece
 
   def initialize(pos=[0,0])
     super(pos)
+    super(team)
     @type = 'king'
   end
 end
