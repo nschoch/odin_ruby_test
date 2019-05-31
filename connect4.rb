@@ -1,5 +1,5 @@
 class Board
-  attr_reader :grid, :player1, :player2, :last_play
+  attr_reader :grid, :player1, :player2, :last_play, :player_queue
   def initialize
     @grid = [['_','_','_','_','_','_','_'],
              ['_','_','_','_','_','_','_'],
