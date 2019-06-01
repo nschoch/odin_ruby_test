@@ -2,10 +2,10 @@ require './chess.rb'
 
 describe Board do
   describe '#showboard' do
-    # it 'shows the blank board' do
-    #   a = Board.new
-    #   expect(a.showboard).to eql(1)
-    # end
+    it 'shows the blank board' do
+      a = Board.new
+      expect(a.showboard).to eql(1)
+    end
   end
 
   describe '#valid_space' do
