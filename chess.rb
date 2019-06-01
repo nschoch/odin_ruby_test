@@ -7,7 +7,6 @@ class Board
     @width = 8
     @length = 8
     @pieces = []
-    # system ('cls')
     @pieces << Rook.new([1,1],'black')
     @pieces << Knight.new([1,2], 'black')
     @pieces << Bishop.new([1,3], 'black')
@@ -59,6 +58,19 @@ class Board
       end
     end
     occupied
+  end
+
+  def determine_occupant(loc)
+    col = loc[1]
+    row = loc[0]
+    occupant = nil
+    @pieces.each do |piece|
+      if piece.pos[0] == row and piece.pos[1] == col
+        occupant = piece
+        break
+      end
+    end
+    occupant
   end
 
   def showboard
@@ -151,7 +163,7 @@ class Pawn < Piece
     @team = team
     @type = 'pawn'
     @display_black = "\u265F"
-    @display_white = "\u2659 "
+    @display_white = "\u2659"
   end
 
 end
@@ -162,8 +174,8 @@ class Rook < Piece
     @pos = pos
     @team = team
     @type = 'rook'
-    @display_black = "\u265c "
-    @display_white = "\u2656 "
+    @display_black = "\u265c"
+    @display_white = "\u2656"
   end
 
 end
@@ -174,8 +186,8 @@ class Knight < Piece
     @pos = pos
     @team = team
     @type = 'knight'
-    @display_black = "\u265e "
-    @display_white = "\u2658 "
+    @display_black = "\u265e"
+    @display_white = "\u2658"
   end
 end
 
@@ -185,8 +197,8 @@ class Bishop < Piece
     @pos = pos
     @team = team
     @type = 'bishop'
-    @display_black = "\u265d "
-    @display_white = "\u2657 "
+    @display_black = "\u265d"
+    @display_white = "\u2657"
   end
 end
 
@@ -196,8 +208,8 @@ class Queen < Piece
     @pos = pos
     @team = team
     @type = 'queen'
-    @display_black = "\u265b "
-    @display_white = "\u2655 "
+    @display_black = "\u265b"
+    @display_white = "\u2655"
   end
 end
 
@@ -207,8 +219,8 @@ class King < Piece
     @pos = pos
     @team = team
     @type = 'king'
-    @display_black = "\u265a "
-    @display_white = "\u2654 "
+    @display_black = "\u265a"
+    @display_white = "\u2654"
   end
 end
 

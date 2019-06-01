@@ -35,6 +35,22 @@ describe Board do
     end
   end
 
+  describe '#determine_occupant' do
+    a = Board.new
+    it 'shows the rook in [1,1]' do
+      expect(a.determine_occupant([1,1])).to be_a(Rook)
+    end
+    it 'shows the pawn in [2,2]' do
+      expect(a.determine_occupant([2,2])).to be_a(Pawn)
+    end
+    it 'shows nil in invalid space [9,10]' do
+      expect(a.determine_occupant([9,10])).to eql(nil)
+    end
+    it 'shows nil in empty space [4,4]' do
+      expect(a.determine_occupant([4,4])).to eql(nil)
+    end
+  end
+
   describe "#translate" do
     a = Board.new
     it 'translates numbers to letters' do
