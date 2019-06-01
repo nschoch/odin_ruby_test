@@ -101,5 +101,10 @@ describe Pawn do
   end
 
   describe '#available_moves' do
+    it 'shows pawn option to move 1 or 2 spaces forward' do
+      a = Board.new
+      p = a.determine_occupant([2,1])
+      expect(p.available_moves(a)).to eql([[3,1],[4,1]])
+    end   
   end 
 end

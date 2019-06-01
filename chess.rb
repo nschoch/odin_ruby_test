@@ -164,6 +164,17 @@ class Pawn < Piece
     @type = 'pawn'
     @display_black = "\u265F"
     @display_white = "\u2659"
+    @move_count = 0
+  end
+
+  def available_moves(board)
+    col = @pos[1]
+    row = @pos[0]
+    available_moves = [[row+1,col+0]]
+    if @move_count == 0
+      available_moves << [row+2, col+0]
+    end
+    available_moves = available_moves.select { |loc| board.space_valid?(loc) }
   end
 
 end
