@@ -2,28 +2,36 @@ require './chess.rb'
 
 describe Board do
   describe '#showboard' do
-    it 'shows the blank board' do
-      a = Board.new
-      expect(a.showboard).to eql(1)
-    end
+    it 'shows the blank board' 
+    # do
+    #   a = Board.new
+    #   expect(a.showboard).to eql(1)
+    # end
   end
 
-  describe '#valid_space' do
+  describe '#space_valid?' do
+    a = Board.new
     it 'confirms 1,1 is a valid space' do
-      a = Board.new
-      expect(a.valid_space([1,1])).to eql(true)
+      expect(a.space_valid?([1,1])).to eql(true)
     end
     it 'confirms 0,0 is invalid' do
-      a = Board.new
-      expect(a.valid_space([0,0])).to eql(false)
+      expect(a.space_valid?([0,0])).to eql(false)
     end
     it 'confirms 8,8 is valid' do
-      a = Board.new
-      expect(a.valid_space([8,8])).to eql(true)
+      expect(a.space_valid?([8,8])).to eql(true)
     end
     it 'confirms 9,8 is invalid' do
-      a = Board.new
-      expect(a.valid_space([9,8])).to eql(false)
+      expect(a.space_valid?([9,8])).to eql(false)
+    end
+  end
+  
+  describe '#space_occupied?' do
+    a = Board.new
+    it 'confirms space vacant' do
+      expect(a.space_occupied?([3,3])).to eql(false)
+    end
+    it 'confirms space occupied' do
+      expect(a.space_occupied?([1,1])).to eql(true)
     end
   end
 

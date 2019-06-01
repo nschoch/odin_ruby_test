@@ -42,14 +42,23 @@ class Board
     @pieces << Pawn.new([7,8], 'white')
   end
 
-  def valid_space(desired_loc)
+  def space_valid?(desired_loc)
     col = desired_loc[1]
     row = desired_loc[0]
-    if col >= 1 and col <= 8 and row >= 1 and row <= 8
-      true
-    else
-      false
+    (col >= 1 and col <= 8 and row >= 1 and row <= 8) ? true : false
+  end
+
+  def space_occupied?(desired_loc)
+    col = desired_loc[1]
+    row = desired_loc[0]
+    occupied = false
+    @pieces.each do |piece|
+      if piece.pos[0] == row and piece.pos[1] == col
+        occupied = true
+        break
+      end
     end
+    occupied
   end
 
   def showboard
