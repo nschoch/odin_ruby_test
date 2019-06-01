@@ -2,10 +2,10 @@ require './chess.rb'
 
 describe Board do
   describe '#showboard' do
-    it 'shows the blank board' do
-      a = Board.new
-      expect(a.showboard).to eql(1)
-    end
+    # it 'shows the blank board' do
+    #   a = Board.new
+    #   expect(a.showboard).to eql(1)
+    # end
   end
 
   describe '#valid_space' do
@@ -25,7 +25,30 @@ describe Board do
       a = Board.new
       expect(a.valid_space([9,8])).to eql(false)
     end
+  end
 
+  describe "#translate" do
+    a = Board.new
+    it 'translates numbers to letters' do
+      expect(a.translate(1)).to eql('A')
+      expect(a.translate(2)).to eql('B')
+      expect(a.translate(3)).to eql('C')
+      expect(a.translate(4)).to eql('D')
+      expect(a.translate(5)).to eql('E')
+      expect(a.translate(6)).to eql('F')
+      expect(a.translate(7)).to eql('G')
+      expect(a.translate(8)).to eql('H')
+    end
+    it 'translates letters to numbers' do
+      expect(a.translate('A')).to eql(1)
+      expect(a.translate('B')).to eql(2)
+      expect(a.translate('C')).to eql(3)
+      expect(a.translate('D')).to eql(4)
+      expect(a.translate('E')).to eql(5)
+      expect(a.translate('F')).to eql(6)
+      expect(a.translate('G')).to eql(7)
+      expect(a.translate('H')).to eql(8)
+    end
   end
 end
 

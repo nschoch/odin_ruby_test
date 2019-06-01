@@ -77,6 +77,44 @@ class Board
     puts "  A B C D E F G H"
   end
 
+  def translate(character)
+    case character
+      when 1
+        "A"
+      when 2
+        "B"
+      when 3
+        "C"
+      when 4
+        "D"
+      when 5
+        "E"
+      when 6
+        "F"
+      when 7
+        "G"
+      when 8
+        "H"
+      when "A"
+        1
+      when "B"
+        2
+      when "C"
+        3
+      when "D"
+        4
+      when "E"
+        5
+      when "F"
+        6
+      when "G"
+        7
+      when "H"
+        8
+      end
+
+  end
+
 end
 
 class Piece
