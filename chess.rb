@@ -197,8 +197,7 @@ class Pawn < Piece
     end
     available_moves = initial_moveset.select { |loc| board.space_valid?(loc) }
     available_moves = available_moves.reject { |loc| board.space_occupied?(loc) } # pawns can't attack straight on
-    available_moves << diagonally_adjacent(board)
-    available_moves
+    available_moves + diagonally_adjacent(board)
   end
 
   def diagonally_adjacent(board)

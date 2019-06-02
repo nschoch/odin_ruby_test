@@ -79,14 +79,13 @@ describe Board do
     it 'shows an error if moving onto the same team' do
       p = a.find_occupant([2,2])
       p.pos = [1,3]
-      a.show_board
       expect(a.move('a2a3')).to eql('black pawn already occupies space')
     end
     it 'destroys opponent if in space' do
       p = a.find_occupant([3,2])
       p.pos = [2,6]
       a.show_board
-      expect(a.move('b6b7')).to eql([2,7])
+      expect(a.move('b6c7')).to eql([2,7])
 
       a.show_board
     end
