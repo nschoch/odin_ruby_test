@@ -82,9 +82,9 @@ class Board
 
     return "no piece at origin" if moving_piece == nil
     return "invalid destination" if space_valid?(dest_loc) == false
-    
-    destination_occupant = find_occupant(dest_loc)
+    return "location not in piece moveset" unless moving_piece.available_moves(self).include?(dest_loc)
 
+    destination_occupant = find_occupant(dest_loc)
     if destination_occupant != nil
       return "#{destination_occupant.team} #{destination_occupant.type} already occupies space" if destination_occupant.team == moving_piece.team
       @pieces.delete(destination_occupant)
@@ -101,7 +101,7 @@ class Board
       until col_count == 9
         piece_present = false
         @pieces.each do |piece|
-          if piece.pos[1] == row_count and piece.pos[0] == col_count
+          if piece.pos[0] == col_count and piece.pos[1] == row_count 
             row_string += "\e[0;30m" + piece.display + "\e[0m "
             piece_present = true
             break
@@ -186,17 +186,36 @@ class Pawn < Piece
     @display_black = "\u265F"
     @display_white = "\u2659"
     @move_count = 0
+    @direction = (@pos[1] == 2) ? 'positive' : 'negative'
   end
 
   def available_moves(board)
-    col = @pos[1]
-    row = @pos[0]
-    initial_moveset = [[row+1,col+0]]
+    col = @pos[0]
+    row = @pos[1]
+    initial_moveset = (@direction == 'positive') ? [[col,row+1]] : [[col, row-1]]
     if @move_count == 0
-      initial_moveset << [row+2, col+0]
+      initial_moveset << ((@direction == 'positive') ? [col, row+2] : [col, row-2])
     end
     available_moves = initial_moveset.select { |loc| board.space_valid?(loc) }
   end
+
+  def diagonally_adjacent(board)
+    col = @pos[0]
+    row = @pos[1]
+    search_left = (@direction == 'positive') ? [col-1, row+1] : [col-1, row-1]
+    search_right = (@direction == 'positive') ? [col+1, row+1] : [col+1, row-1]
+    left_occupant = board.find_occupant(search_left)
+    right_occupant = board.find_occupant(search_right)
+    additional_moves = []
+    if left_occupant.nil? == false and left_occupant.team != @team
+      additional_moves << left_occupant.pos
+    end
+    if right_occupant.nil? == false and right_occupant.team != @team
+      additional_moves << right_occupant.pos
+    end
+    additional_moves
+  end
+
 end
 
 class Rook < Piece
@@ -206,6 +225,9 @@ class Rook < Piece
     @type = 'rook'
     @display_black = "\u265c"
     @display_white = "\u2656"
+  end
+
+  def available_moves(board)
   end
 end
 
@@ -217,6 +239,9 @@ class Knight < Piece
     @display_black = "\u265e"
     @display_white = "\u2658"
   end
+
+  def available_moves(board)
+  end
 end
 
 class Bishop < Piece
@@ -226,6 +251,9 @@ class Bishop < Piece
     @type = 'bishop'
     @display_black = "\u265d"
     @display_white = "\u2657"
+  end
+
+  def available_moves(board)
   end
 end
 
@@ -237,6 +265,9 @@ class Queen < Piece
     @display_black = "\u265b"
     @display_white = "\u2655"
   end
+
+  def available_moves(board)
+  end
 end
 
 class King < Piece
@@ -246,6 +277,9 @@ class King < Piece
     @type = 'king'
     @display_black = "\u265a"
     @display_white = "\u2654"
+  end
+
+  def available_moves(board)
   end
 end
 

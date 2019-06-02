@@ -84,14 +84,14 @@ describe Board do
       expect(a.move('c5c6')).to eql('no piece at origin')
     end
     it 'shows an error if moving onto the same team' do
-      expect(a.move('a1a2')).to eql('black pawn already occupies space')
+      expect(a.move('a2b2')).to eql('black pawn already occupies space')
     end
     it 'destroys opponent if in space' do
       expect(a.move('a1a7')).to eql([1,7])
       a.showboard
     end
     it 'allows clear movement' do
-      expect(a.move('a2c5')).to eql([3,5])
+      expect(a.move('a2a4')).to eql([1,4])
       a.showboard
     end
   end
@@ -124,8 +124,24 @@ describe Pawn do
   describe '#available_moves' do
     it 'shows pawn option to move 1 or 2 spaces forward' do
       a = Board.new
-      p = a.find_occupant([2,1])
-      expect(p.available_moves(a)).to eql([[3,1],[4,1]])
+      p = a.find_occupant([1,2])
+      expect(p.available_moves(a)).to eql([[1,3],[1,4]])
     end   
   end 
+
+  describe '#diagonally_adjacent' do
+    a = Board.new
+    p = a.find_occupant([1,2])
+    it 'gives nothing if no adjacent enemy pieces' do
+      expect(p.diagonally_adjacent(a)).to eql([])
+    end
+    it 'shows diagonal option' do
+      p.pos = [1,6]
+      expect(p.diagonally_adjacent(a)).to eql([[2,7]])
+    end
+    it 'shows two diagonal options' do
+      p.pos = [2,6]
+      expect(p.diagonally_adjacent(a)).to eql([[1,7],[3,7]])
+    end
+  end
 end
