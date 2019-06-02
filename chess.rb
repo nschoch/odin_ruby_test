@@ -232,9 +232,6 @@ class Rook < Piece
     col = @pos[0]
     row = @pos[1]
     moveset = []
-
-    #  can this be done with a proc or block?
-
     adjustments = [[0,1],[0,-1],[1,0],[-1,0]]
     moveset = []
     adjustments.each do |adj|
@@ -256,7 +253,6 @@ class Rook < Piece
         end
       end
     end
-    
     moveset
   end
 end
