@@ -35,19 +35,19 @@ describe Board do
     end
   end
 
-  describe '#determine_occupant' do
+  describe '#find_occupant' do
     a = Board.new
     it 'shows the rook in [1,1]' do
-      expect(a.determine_occupant([1,1])).to be_a(Rook)
+      expect(a.find_occupant([1,1])).to be_a(Rook)
     end
     it 'shows the pawn in [2,2]' do
-      expect(a.determine_occupant([2,2])).to be_a(Pawn)
+      expect(a.find_occupant([2,2])).to be_a(Pawn)
     end
     it 'shows nil in invalid space [9,10]' do
-      expect(a.determine_occupant([9,10])).to eql(nil)
+      expect(a.find_occupant([9,10])).to eql(nil)
     end
     it 'shows nil in empty space [4,4]' do
-      expect(a.determine_occupant([4,4])).to eql(nil)
+      expect(a.find_occupant([4,4])).to eql(nil)
     end
   end
 
@@ -72,6 +72,27 @@ describe Board do
       expect(a.translate('F')).to eql(6)
       expect(a.translate('G')).to eql(7)
       expect(a.translate('H')).to eql(8)
+    end
+  end
+
+  describe '#move' do
+    a = Board.new
+    it 'shows an error for an invalid destination' do
+      expect(a.move('a2a9')).to eql('invalid destination')
+    end
+    it 'shows an error if the origin space is empty' do
+      expect(a.move('c5c6')).to eql('no piece at origin')
+    end
+    it 'shows an error if moving onto the same team' do
+      expect(a.move('a1a2')).to eql('black pawn already occupies space')
+    end
+    it 'destroys opponent if in space' do
+      expect(a.move('a1a7')).to eql([1,7])
+      a.showboard
+    end
+    it 'allows clear movement' do
+      expect(a.move('a2c5')).to eql([3,5])
+      a.showboard
     end
   end
 end
@@ -103,7 +124,7 @@ describe Pawn do
   describe '#available_moves' do
     it 'shows pawn option to move 1 or 2 spaces forward' do
       a = Board.new
-      p = a.determine_occupant([2,1])
+      p = a.find_occupant([2,1])
       expect(p.available_moves(a)).to eql([[3,1],[4,1]])
     end   
   end 

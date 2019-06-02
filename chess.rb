@@ -8,37 +8,37 @@ class Board
     @length = 8
     @pieces = []
     @pieces << Rook.new([1,1],'black')
-    @pieces << Knight.new([1,2], 'black')
-    @pieces << Bishop.new([1,3], 'black')
-    @pieces << Queen.new([1,4], 'black')
-    @pieces << King.new([1,5], 'black')
-    @pieces << Bishop.new([1,6], 'black')
-    @pieces << Knight.new([1,7], 'black')
-    @pieces << Rook.new([1,8], 'black')
-    @pieces << Pawn.new([2,1], 'black')
+    @pieces << Knight.new([2,1], 'black')
+    @pieces << Bishop.new([3,1], 'black')
+    @pieces << Queen.new([4,1], 'black')
+    @pieces << King.new([5,1], 'black')
+    @pieces << Bishop.new([6,1], 'black')
+    @pieces << Knight.new([7,1], 'black')
+    @pieces << Rook.new([8,1], 'black')
+    @pieces << Pawn.new([1,2], 'black')
     @pieces << Pawn.new([2,2], 'black')
-    @pieces << Pawn.new([2,3], 'black')
-    @pieces << Pawn.new([2,4], 'black')
-    @pieces << Pawn.new([2,5], 'black')
-    @pieces << Pawn.new([2,6], 'black')
-    @pieces << Pawn.new([2,7], 'black')
-    @pieces << Pawn.new([2,8], 'black')
-    @pieces << Rook.new([8,1],'white')
-    @pieces << Knight.new([8,2], 'white')
-    @pieces << Bishop.new([8,3], 'white')
-    @pieces << Queen.new([8,4], 'white')
-    @pieces << King.new([8,5], 'white')
-    @pieces << Bishop.new([8,6], 'white')
-    @pieces << Knight.new([8,7], 'white')
+    @pieces << Pawn.new([3,2], 'black')
+    @pieces << Pawn.new([4,2], 'black')
+    @pieces << Pawn.new([5,2], 'black')
+    @pieces << Pawn.new([6,2], 'black')
+    @pieces << Pawn.new([7,2], 'black')
+    @pieces << Pawn.new([8,2], 'black')
+    @pieces << Rook.new([1,8],'white')
+    @pieces << Knight.new([2,8], 'white')
+    @pieces << Bishop.new([3,8], 'white')
+    @pieces << Queen.new([4,8], 'white')
+    @pieces << King.new([5,8], 'white')
+    @pieces << Bishop.new([6,8], 'white')
+    @pieces << Knight.new([7,8], 'white')
     @pieces << Rook.new([8,8], 'white')
-    @pieces << Pawn.new([7,1], 'white')
-    @pieces << Pawn.new([7,2], 'white')
-    @pieces << Pawn.new([7,3], 'white')
-    @pieces << Pawn.new([7,4], 'white')
-    @pieces << Pawn.new([7,5], 'white')
-    @pieces << Pawn.new([7,6], 'white')
+    @pieces << Pawn.new([1,7], 'white')
+    @pieces << Pawn.new([2,7], 'white')
+    @pieces << Pawn.new([3,7], 'white')
+    @pieces << Pawn.new([4,7], 'white')
+    @pieces << Pawn.new([5,7], 'white')
+    @pieces << Pawn.new([6,7], 'white')
     @pieces << Pawn.new([7,7], 'white')
-    @pieces << Pawn.new([7,8], 'white')
+    @pieces << Pawn.new([8,7], 'white')
   end
 
   def space_valid?(desired_loc)
@@ -60,7 +60,7 @@ class Board
     occupied
   end
 
-  def determine_occupant(loc)
+  def find_occupant(loc)
     col = loc[1]
     row = loc[0]
     occupant = nil
@@ -73,6 +73,26 @@ class Board
     occupant
   end
 
+  def move(instruction)
+    inst_arr = instruction.split('')
+    origin_loc = [translate(inst_arr[0].upcase),inst_arr[1].to_i]
+    dest_loc = [translate(inst_arr[2].upcase),inst_arr[3].to_i]
+    puts "test #{instruction} #{origin_loc} #{dest_loc}"
+    moving_piece = find_occupant(origin_loc)
+
+    return "no piece at origin" if moving_piece == nil
+    return "invalid destination" if space_valid?(dest_loc) == false
+    
+    destination_occupant = find_occupant(dest_loc)
+
+    if destination_occupant != nil
+      return "#{destination_occupant.team} #{destination_occupant.type} already occupies space" if destination_occupant.team == moving_piece.team
+      @pieces.delete(destination_occupant)
+      puts "Destroyed #{destination_occupant.team} #{destination_occupant.type}"
+    end
+    moving_piece.pos = dest_loc
+  end
+
   def showboard
     row_count = 1
     until row_count == 9
@@ -81,8 +101,8 @@ class Board
       until col_count == 9
         piece_present = false
         @pieces.each do |piece|
-          if piece.pos[0] == row_count and piece.pos[1] == col_count
-            row_string += piece.display
+          if piece.pos[1] == row_count and piece.pos[0] == col_count
+            row_string += "\e[0;30m" + piece.display + "\e[0m "
             piece_present = true
             break
           end
@@ -140,6 +160,7 @@ end
 
 class Piece
   attr_reader :pos, :team, :type
+  attr_writer :pos
 
   def initialize(pos=[0,0], team='black')
     @pos = pos
@@ -154,10 +175,10 @@ class Piece
   def display
     @team == 'black' ? @display_black : @display_white
   end
+
 end
 
 class Pawn < Piece
-
   def initialize(pos=[0,0], team='black')
     @pos = pos
     @team = team
@@ -170,17 +191,15 @@ class Pawn < Piece
   def available_moves(board)
     col = @pos[1]
     row = @pos[0]
-    available_moves = [[row+1,col+0]]
+    initial_moveset = [[row+1,col+0]]
     if @move_count == 0
-      available_moves << [row+2, col+0]
+      initial_moveset << [row+2, col+0]
     end
-    available_moves = available_moves.select { |loc| board.space_valid?(loc) }
+    available_moves = initial_moveset.select { |loc| board.space_valid?(loc) }
   end
-
 end
 
 class Rook < Piece
-
   def initialize(pos=[0,0], team='black')
     @pos = pos
     @team = team
@@ -188,11 +207,9 @@ class Rook < Piece
     @display_black = "\u265c"
     @display_white = "\u2656"
   end
-
 end
 
 class Knight < Piece
-
   def initialize(pos=[0,0], team='black')
     @pos = pos
     @team = team
@@ -203,7 +220,6 @@ class Knight < Piece
 end
 
 class Bishop < Piece
-
   def initialize(pos=[0,0], team='black')
     @pos = pos
     @team = team
@@ -214,7 +230,6 @@ class Bishop < Piece
 end
 
 class Queen < Piece
-
   def initialize(pos=[0,0], team='black')
     @pos = pos
     @team = team
@@ -225,7 +240,6 @@ class Queen < Piece
 end
 
 class King < Piece
-
   def initialize(pos=[0,0], team='black')
     @pos = pos
     @team = team
