@@ -77,7 +77,6 @@ class Board
     inst_arr = instruction.split('')
     origin_loc = [translate(inst_arr[0].upcase),inst_arr[1].to_i]
     dest_loc = [translate(inst_arr[2].upcase),inst_arr[3].to_i]
-    puts "test #{instruction} #{origin_loc} #{dest_loc}"
     moving_piece = find_occupant(origin_loc)
 
     return "no piece at origin" if moving_piece == nil
@@ -93,7 +92,7 @@ class Board
     moving_piece.pos = dest_loc
   end
 
-  def showboard
+  def show_board
     row_count = 1
     until row_count == 9
       col_count = 1
@@ -197,6 +196,9 @@ class Pawn < Piece
       initial_moveset << ((@direction == 'positive') ? [col, row+2] : [col, row-2])
     end
     available_moves = initial_moveset.select { |loc| board.space_valid?(loc) }
+    available_moves = available_moves.reject { |loc| board.space_occupied?(loc) } # pawns can't attack straight on
+    available_moves << diagonally_adjacent(board)
+    available_moves
   end
 
   def diagonally_adjacent(board)

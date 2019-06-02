@@ -1,13 +1,6 @@
 require './chess.rb'
 
 describe Board do
-  describe '#showboard' do
-    it 'shows the blank board' 
-    # do
-    #   a = Board.new
-    #   expect(a.showboard).to eql(1)
-    # end
-  end
 
   describe '#space_valid?' do
     a = Board.new
@@ -84,15 +77,21 @@ describe Board do
       expect(a.move('c5c6')).to eql('no piece at origin')
     end
     it 'shows an error if moving onto the same team' do
-      expect(a.move('a2b2')).to eql('black pawn already occupies space')
+      p = a.find_occupant([2,2])
+      p.pos = [1,3]
+      a.show_board
+      expect(a.move('a2a3')).to eql('black pawn already occupies space')
     end
     it 'destroys opponent if in space' do
-      expect(a.move('a1a7')).to eql([1,7])
-      a.showboard
+      p = a.find_occupant([3,2])
+      p.pos = [2,6]
+      a.show_board
+      expect(a.move('b6b7')).to eql([2,7])
+
+      a.show_board
     end
     it 'allows clear movement' do
       expect(a.move('a2a4')).to eql([1,4])
-      a.showboard
     end
   end
 end
@@ -126,6 +125,11 @@ describe Pawn do
       a = Board.new
       p = a.find_occupant([1,2])
       expect(p.available_moves(a)).to eql([[1,3],[1,4]])
+    end   
+    it 'shows white pawn option to move 1 or 2 spaces forward' do
+      a = Board.new
+      p = a.find_occupant([1,7])
+      expect(p.available_moves(a)).to eql([[1,6],[1,5]])
     end   
   end 
 
