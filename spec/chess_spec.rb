@@ -84,10 +84,7 @@ describe Board do
     it 'destroys opponent if in space' do
       p = a.find_occupant([3,2])
       p.pos = [2,6]
-      a.show_board
       expect(a.move('b6c7')).to eql([3,7])
-
-      a.show_board
     end
     it 'allows clear movement' do
       expect(a.move('a2a4')).to eql([1,4])
@@ -165,7 +162,8 @@ describe Rook do
       a.show_board
       expect(r.available_moves(a)).to eql([])
       r.pos = [1,3]
-      expect(r.available_moves(a)).to eql([[1, 4], [1, 5], [1, 6], [2, 3], [3, 3], [4, 3], [5, 3], [6, 3], [7, 3], [8, 3]])
+      a.show_board
+      expect(r.available_moves(a)).to eql([[1, 4], [1, 5], [1, 6], [1, 7], [2, 3], [3, 3], [4, 3], [5, 3], [6, 3], [7, 3], [8, 3]])
     end
   end
 end

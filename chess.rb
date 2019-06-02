@@ -233,48 +233,23 @@ class Rook < Piece
     row = @pos[1]
     moveset = []
 
-    counter = 1
-    until counter >= 8
-      test_loc = [col, row + counter]
-      if board.space_occupied?(test_loc) == false and board.space_valid?(test_loc)
-        moveset << test_loc
-      else
-        break
-      end
-      counter += 1
-    end
-    
-    counter = 1
-    until counter >= 8
-      test_loc = [col, row - counter]
-      if board.space_occupied?(test_loc) == false and board.space_valid?(test_loc)
-        moveset << test_loc
-      else
-        break
-      end
-      counter += 1
-    end
+    #  can this be done with a proc or block?
 
-    counter = 1
-    until counter >= 8
-      test_loc = [col + counter, row]
-      if board.space_occupied?(test_loc) == false and board.space_valid?(test_loc)
-        moveset << test_loc
-      else
-        break
+    adjustments = [[0,1],[0,-1],[1,0],[-1,0]]
+    moveset = []
+    adjustments.each do |adj|
+      counter = 0
+      until counter >= 7
+        test_col = col + adj[0] != col ? (col + adj[0] + counter) : col
+        test_row = row + adj[1] != row ? (row + adj[1] + counter) : row 
+        test_loc = [test_col, test_row]
+        if board.space_occupied?(test_loc) == false and board.space_valid?(test_loc)
+          moveset << test_loc
+        else
+          counter = 10
+        end
+        counter += 1
       end
-      counter += 1
-    end
-
-    counter = 1
-    until counter >= 8
-      test_loc = [col - counter, row]
-      if board.space_occupied?(test_loc) == false and board.space_valid?(test_loc)
-        moveset << test_loc
-      else
-        break
-      end
-      counter += 1
     end
     
     moveset
