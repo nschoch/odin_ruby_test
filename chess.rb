@@ -243,12 +243,17 @@ class Rook < Piece
         test_col = col + adj[0] != col ? (col + adj[0] + counter) : col
         test_row = row + adj[1] != row ? (row + adj[1] + counter) : row 
         test_loc = [test_col, test_row]
-        if board.space_occupied?(test_loc) == false and board.space_valid?(test_loc)
+        if board.space_valid?(test_loc) == false
+          counter = 7
+        elsif board.space_occupied?(test_loc) == false
           moveset << test_loc
+          counter +=1
+        elsif board.find_occupant(test_loc)&.team != self.team 
+          moveset << test_loc
+          counter = 7
         else
-          counter = 10
+          counter = 7
         end
-        counter += 1
       end
     end
     

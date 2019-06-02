@@ -10,6 +10,9 @@ describe Board do
     it 'confirms 0,0 is invalid' do
       expect(a.space_valid?([0,0])).to eql(false)
     end
+    it 'confirms 0,1 is invalid' do
+      expect(a.space_valid?([0,1])).to eql(false)
+    end
     it 'confirms 8,8 is valid' do
       expect(a.space_valid?([8,8])).to eql(true)
     end
@@ -159,10 +162,8 @@ describe Rook do
     it 'has the correct moveset' do
       a = Board.new
       r = a.find_occupant([1,1])
-      a.show_board
       expect(r.available_moves(a)).to eql([])
       r.pos = [1,3]
-      a.show_board
       expect(r.available_moves(a)).to eql([[1, 4], [1, 5], [1, 6], [1, 7], [2, 3], [3, 3], [4, 3], [5, 3], [6, 3], [7, 3], [8, 3]])
     end
   end
