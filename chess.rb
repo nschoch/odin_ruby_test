@@ -229,6 +229,55 @@ class Rook < Piece
   end
 
   def available_moves(board)
+    col = @pos[0]
+    row = @pos[1]
+    moveset = []
+
+    counter = 1
+    until counter >= 8
+      test_loc = [col, row + counter]
+      if board.space_occupied?(test_loc) == false and board.space_valid?(test_loc)
+        moveset << test_loc
+      else
+        break
+      end
+      counter += 1
+    end
+    
+    counter = 1
+    until counter >= 8
+      test_loc = [col, row - counter]
+      if board.space_occupied?(test_loc) == false and board.space_valid?(test_loc)
+        moveset << test_loc
+      else
+        break
+      end
+      counter += 1
+    end
+
+    counter = 1
+    until counter >= 8
+      test_loc = [col + counter, row]
+      if board.space_occupied?(test_loc) == false and board.space_valid?(test_loc)
+        moveset << test_loc
+      else
+        break
+      end
+      counter += 1
+    end
+
+    counter = 1
+    until counter >= 8
+      test_loc = [col - counter, row]
+      if board.space_occupied?(test_loc) == false and board.space_valid?(test_loc)
+        moveset << test_loc
+      else
+        break
+      end
+      counter += 1
+    end
+    
+    moveset
   end
 end
 

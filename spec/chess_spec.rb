@@ -79,13 +79,13 @@ describe Board do
     it 'shows an error if moving onto the same team' do
       p = a.find_occupant([2,2])
       p.pos = [1,3]
-      expect(a.move('a2a3')).to eql('black pawn already occupies space')
+      expect(a.move('a2a3')).not_to eql('[1,3]')
     end
     it 'destroys opponent if in space' do
       p = a.find_occupant([3,2])
       p.pos = [2,6]
       a.show_board
-      expect(a.move('b6c7')).to eql([2,7])
+      expect(a.move('b6c7')).to eql([3,7])
 
       a.show_board
     end
@@ -145,6 +145,27 @@ describe Pawn do
     it 'shows two diagonal options' do
       p.pos = [2,6]
       expect(p.diagonally_adjacent(a)).to eql([[1,7],[3,7]])
+    end
+  end
+end
+
+describe Rook do
+  describe '#announce' do
+    it 'announces the piece and position' do
+      a = Board.new
+      r = a.find_occupant([1,1])
+      r.announce
+    end
+  end
+
+  describe '#available_moves' do
+    it 'has the correct moveset' do
+      a = Board.new
+      r = a.find_occupant([1,1])
+      a.show_board
+      expect(r.available_moves(a)).to eql([])
+      r.pos = [1,3]
+      expect(r.available_moves(a)).to eql([[1, 4], [1, 5], [1, 6], [2, 3], [3, 3], [4, 3], [5, 3], [6, 3], [7, 3], [8, 3]])
     end
   end
 end
