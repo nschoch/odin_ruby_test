@@ -310,6 +310,9 @@ class Queen < Piece
   end
 
   def raw_moves(board)
+    moveset = []
+    adjustments = [[0,1],[0,-1],[1,0],[-1,0],[1,1],[1,-1],[-1,-1],[1,-1]]
+    moveset + running_moves(board,self,adjustments)
   end
 end
 
@@ -323,6 +326,16 @@ class King < Piece
   end
 
   def raw_moves(board)
+    col = @pos[0]
+    row = @pos[1]
+    moveset = [[col+0, row+1],
+               [col+1, row+1],
+               [col+1, row+0],
+               [col+1, row-1],
+               [col+0, row-1],
+               [col-1, row-1],
+               [col-1, row+0],
+               [col-1, row+1]]
   end
 end
 

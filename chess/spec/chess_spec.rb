@@ -154,7 +154,7 @@ describe Rook do
     it 'announces the piece and position' do
       a = Board.new
       r = a.find_occupant([1,1])
-      r.announce
+      expect(r.announce).to eql('I am a black rook. I am located at [1, 1].')
     end
   end
 
@@ -199,4 +199,43 @@ describe Bishop do
       expect(b.raw_moves(a)).to eql([[2, 4], [3, 5], [4, 6], [5, 7]])
     end
   end
+end
+
+describe Queen do
+  a = Board.new
+  q = a.find_occupant([4,1])
+
+  describe '#announce' do
+    it 'announces the piece and position' do
+      expect(q.announce).to eql('I am a black queen. I am located at [4, 1].')
+    end
+  end
+
+  describe '#raw_moves' do
+    it 'has the correct moveset' do
+      expect(q.raw_moves(a)).to eql([])
+      q.pos = [4,4]
+      expect(q.raw_moves(a)).to eql([[4, 5], [4, 6], [4, 7], [4, 3], [5, 4], [6, 4], [7, 4], [8, 4], [3, 4], [5, 5], [6, 6], [7, 7], [5, 3], [6, 4], [7, 5], [8, 6], [3, 3], [5, 3], [6, 4], [7, 5], [8, 6]])
+    end
+  end
+end
+
+describe King do
+  a = Board.new
+  k = a.find_occupant([5,1])
+
+  describe '#announce' do
+    it 'announces the piece and position' do
+      expect(k.announce).to eql('I am a black king. I am located at [5, 1].')
+    end
+  end
+
+  describe '#raw_moves' do
+    it 'has the correct moveset' do
+      expect(k.raw_moves(a)).to eql([[5, 2], [6, 2], [6, 1], [6, 0], [5, 0], [4, 0], [4, 1], [4, 2]])
+      k.pos = [4,4]
+      expect(k.raw_moves(a)).to eql([[4, 5], [5, 5], [5, 4], [5, 3], [4, 3], [3, 3], [3, 4], [3, 5]])
+    end
+  end
+
 end
