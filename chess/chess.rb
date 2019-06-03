@@ -81,7 +81,7 @@ class Board
 
     return "no piece at origin" if moving_piece == nil
     return "invalid destination" if space_valid?(dest_loc) == false
-    return "location not in piece moveset" unless moving_piece.available_moves(self).include?(dest_loc)
+    return "location not in piece moveset" unless moving_piece.raw_moves(self).include?(dest_loc)
 
     destination_occupant = find_occupant(dest_loc)
     if destination_occupant != nil
@@ -175,6 +175,32 @@ class Piece
     @team == 'black' ? @display_black : @display_white
   end
 
+  def running_moves(board,piece,adjustments)
+    col = piece.pos[0]
+    row = piece.pos[1]
+    running_moves = []
+    adjustments.each do |adj|
+      counter = 0
+      until counter >= 7
+        test_col = col + adj[0] != col ? (col + adj[0] + counter) : col
+        test_row = row + adj[1] != row ? (row + adj[1] + counter) : row 
+        test_loc = [test_col, test_row]
+        if board.space_valid?(test_loc) == false
+          counter = 7
+        elsif board.space_occupied?(test_loc) == false
+          running_moves << test_loc
+          counter +=1
+        elsif board.find_occupant(test_loc)&.team != self.team 
+          running_moves << test_loc
+          counter = 7
+        else
+          counter = 7
+        end
+      end
+    end
+    return running_moves
+  end
+
 end
 
 class Pawn < Piece
@@ -188,16 +214,16 @@ class Pawn < Piece
     @direction = (@pos[1] == 2) ? 'positive' : 'negative'
   end
 
-  def available_moves(board)
+  def raw_moves(board)
     col = @pos[0]
     row = @pos[1]
     initial_moveset = (@direction == 'positive') ? [[col,row+1]] : [[col, row-1]]
     if @move_count == 0
       initial_moveset << ((@direction == 'positive') ? [col, row+2] : [col, row-2])
     end
-    available_moves = initial_moveset.select { |loc| board.space_valid?(loc) }
-    available_moves = available_moves.reject { |loc| board.space_occupied?(loc) } # pawns can't attack straight on
-    available_moves + diagonally_adjacent(board)
+    raw_moves = initial_moveset.select { |loc| board.space_valid?(loc) }
+    raw_moves = raw_moves.reject { |loc| board.space_occupied?(loc) } # pawns can't attack straight on
+    raw_moves + diagonally_adjacent(board)
   end
 
   def diagonally_adjacent(board)
@@ -228,32 +254,10 @@ class Rook < Piece
     @display_white = "\u2656"
   end
 
-  def available_moves(board)
-    col = @pos[0]
-    row = @pos[1]
+  def raw_moves(board)
     moveset = []
     adjustments = [[0,1],[0,-1],[1,0],[-1,0]]
-    moveset = []
-    adjustments.each do |adj|
-      counter = 0
-      until counter >= 7
-        test_col = col + adj[0] != col ? (col + adj[0] + counter) : col
-        test_row = row + adj[1] != row ? (row + adj[1] + counter) : row 
-        test_loc = [test_col, test_row]
-        if board.space_valid?(test_loc) == false
-          counter = 7
-        elsif board.space_occupied?(test_loc) == false
-          moveset << test_loc
-          counter +=1
-        elsif board.find_occupant(test_loc)&.team != self.team 
-          moveset << test_loc
-          counter = 7
-        else
-          counter = 7
-        end
-      end
-    end
-    moveset
+    moveset + running_moves(board,self,adjustments)
   end
 end
 
@@ -266,7 +270,17 @@ class Knight < Piece
     @display_white = "\u2658"
   end
 
-  def available_moves(board)
+  def raw_moves(board)
+    col = @pos[0]
+    row = @pos[1]
+    moveset = [[col+1, row+2],
+               [col+2, row+1],
+               [col+2, row-1],
+               [col+1, row-2],
+               [col-1, row-2],
+               [col-2, row-1],
+               [col-2, row+1],
+               [col-1, row+2]]
   end
 end
 
@@ -279,7 +293,10 @@ class Bishop < Piece
     @display_white = "\u2657"
   end
 
-  def available_moves(board)
+  def raw_moves(board)
+    moveset = []
+    adjustments = [[1,1],[1,-1],[-1,-1],[1,-1]]
+    moveset + running_moves(board,self,adjustments)
   end
 end
 
@@ -292,7 +309,7 @@ class Queen < Piece
     @display_white = "\u2655"
   end
 
-  def available_moves(board)
+  def raw_moves(board)
   end
 end
 
@@ -305,7 +322,7 @@ class King < Piece
     @display_white = "\u2654"
   end
 
-  def available_moves(board)
+  def raw_moves(board)
   end
 end
 
