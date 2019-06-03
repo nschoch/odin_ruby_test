@@ -1,4 +1,4 @@
-require './chess.rb'
+require './chess/chess.rb'
 
 describe Board do
 
