@@ -180,3 +180,23 @@ describe Knight do
     end
   end
 end
+
+describe Bishop do
+  describe '#announce' do
+    it 'announces the piece and position' do
+      a = Board.new
+      b = a.find_occupant([3,1])
+      expect(b.announce).to eql('I am a black bishop. I am located at [3, 1].')
+    end
+  end
+
+  describe '#raw_moves' do
+    it 'has the correct moveset' do
+      a = Board.new
+      b = a.find_occupant([3,1])
+      expect(b.raw_moves(a)).to eql([])
+      b.pos = [1,3]
+      expect(b.raw_moves(a)).to eql([[2, 4], [3, 5], [4, 6], [5, 7]])
+    end
+  end
+end
