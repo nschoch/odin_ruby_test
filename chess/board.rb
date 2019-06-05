@@ -108,7 +108,7 @@ class Board
     occupant
   end
 
-  def move(instruction)
+  def move(instruction, team)
     inst_arr = instruction.split('')
     origin_loc = [translate(inst_arr[0].upcase),inst_arr[1].to_i]
     dest_loc = [translate(inst_arr[2].upcase),inst_arr[3].to_i]
@@ -116,7 +116,8 @@ class Board
 
     return "no piece at origin" if moving_piece == nil
     return "invalid destination" if space_valid?(dest_loc) == false
-    return "location not in piece moveset" unless moving_piece.raw_moves(self).include?(dest_loc)
+    return "not your piece" if moving_piece.team != team
+    return "location not in piece moveset" unless show_available_moves(moving_piece).include?(dest_loc)
 
     destination_occupant = find_occupant(dest_loc)
     if destination_occupant != nil
@@ -125,6 +126,7 @@ class Board
       puts "Destroyed #{destination_occupant.team} #{destination_occupant.type}"
     end
     moving_piece.pos = dest_loc
+    return "good"
   end
 
   def show_available_moves(piece, recursive=true)
@@ -184,7 +186,7 @@ class Board
         piece_present = false
         @pieces.each do |piece|
           if piece.pos[0] == col_count and piece.pos[1] == row_count 
-            row_string += "\e[0;30m" + piece.display + "\e[0m "
+            row_string += piece.display
             piece_present = true
             break
           end

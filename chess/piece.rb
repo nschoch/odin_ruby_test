@@ -15,7 +15,8 @@ class Piece
   end
 
   def display
-    @team == 'black' ? @display_black : @display_white
+    piece_icon = (@team == 'black') ? @display_black : @display_white
+    "\e[0;30m" + piece_icon + "\e[0m "
   end
 
   def running_moves(board,piece,adjustments)
@@ -49,7 +50,7 @@ class Pawn < Piece
     @pos = pos
     @team = team
     @type = 'pawn'
-    @display_black = "\u265F"
+    @display_black = "#"#"\u265F"
     @display_white = "\u2659"
     @move_count = 0
     @direction = (@pos[1] == 2) ? 'positive' : 'negative'
