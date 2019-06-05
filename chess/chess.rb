@@ -1,4 +1,17 @@
 class Game
+  def initialize
+    @board = Board.new
+    puts "Let's play chess."
+    @turn_order = ['black', 'white']
+    current_player = turn_order.shift
+  end
+
+  def play
+    while game_over == false
+      puts "#{current_player}'s turn"
+    end
+  end
+
 end
 
 class Board
@@ -90,6 +103,10 @@ class Board
       puts "Destroyed #{destination_occupant.team} #{destination_occupant.type}"
     end
     moving_piece.pos = dest_loc
+  end
+
+  def show_available_moves(piece)
+    puts "I love LA"
   end
 
   def show_board

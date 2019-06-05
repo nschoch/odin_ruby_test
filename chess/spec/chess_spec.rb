@@ -237,5 +237,8 @@ describe King do
       expect(k.raw_moves(a)).to eql([[4, 5], [5, 5], [5, 4], [5, 3], [4, 3], [3, 3], [3, 4], [3, 5]])
     end
   end
+end
 
+describe Game do
+  # a = Game.new
 end
