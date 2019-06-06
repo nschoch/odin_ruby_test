@@ -30,6 +30,7 @@ class Game
       end
     end
     puts "Checkmate #{team_up}"
+    @board.show_board
   end
 
   def request_action
