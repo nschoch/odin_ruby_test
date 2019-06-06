@@ -1,0 +1,276 @@
+---
+:board: !ruby/object:Board
+  width: 8
+  length: 8
+  pieces:
+  - !ruby/object:Rook
+    pos:
+    - 8
+    - 4
+    team: black
+    type: rook
+    display_black: "♜"
+    display_white: "♖"
+  - !ruby/object:Knight
+    pos:
+    - 2
+    - 1
+    team: black
+    type: knight
+    display_black: "♞"
+    display_white: "♘"
+  - !ruby/object:Bishop
+    pos:
+    - 3
+    - 1
+    team: black
+    type: bishop
+    display_black: "♝"
+    display_white: "♗"
+  - !ruby/object:Queen
+    pos:
+    - 4
+    - 1
+    team: black
+    type: queen
+    display_black: "♛"
+    display_white: "♕"
+  - !ruby/object:King
+    pos:
+    - 5
+    - 1
+    team: black
+    type: king
+    display_black: "♚"
+    display_white: "♔"
+  - !ruby/object:Bishop
+    pos:
+    - 6
+    - 1
+    team: black
+    type: bishop
+    display_black: "♝"
+    display_white: "♗"
+  - !ruby/object:Knight
+    pos:
+    - 7
+    - 1
+    team: black
+    type: knight
+    display_black: "♞"
+    display_white: "♘"
+  - !ruby/object:Rook
+    pos:
+    - 8
+    - 1
+    team: black
+    type: rook
+    display_black: "♜"
+    display_white: "♖"
+  - !ruby/object:Pawn
+    pos:
+    - 2
+    - 5
+    team: black
+    type: pawn
+    display_black: "♙"
+    display_white: "♙"
+    move_count: 0
+    direction: positive
+  - !ruby/object:Pawn
+    pos:
+    - 3
+    - 2
+    team: black
+    type: pawn
+    display_black: "♙"
+    display_white: "♙"
+    move_count: 0
+    direction: positive
+  - !ruby/object:Pawn
+    pos:
+    - 4
+    - 2
+    team: black
+    type: pawn
+    display_black: "♙"
+    display_white: "♙"
+    move_count: 0
+    direction: positive
+  - !ruby/object:Pawn
+    pos:
+    - 5
+    - 2
+    team: black
+    type: pawn
+    display_black: "♙"
+    display_white: "♙"
+    move_count: 0
+    direction: positive
+  - !ruby/object:Pawn
+    pos:
+    - 6
+    - 2
+    team: black
+    type: pawn
+    display_black: "♙"
+    display_white: "♙"
+    move_count: 0
+    direction: positive
+  - !ruby/object:Pawn
+    pos:
+    - 7
+    - 2
+    team: black
+    type: pawn
+    display_black: "♙"
+    display_white: "♙"
+    move_count: 0
+    direction: positive
+  - !ruby/object:Pawn
+    pos:
+    - 8
+    - 2
+    team: black
+    type: pawn
+    display_black: "♙"
+    display_white: "♙"
+    move_count: 0
+    direction: positive
+  - !ruby/object:Rook
+    pos:
+    - 1
+    - 7
+    team: white
+    type: rook
+    display_black: "♜"
+    display_white: "♖"
+  - !ruby/object:Knight
+    pos:
+    - 2
+    - 8
+    team: white
+    type: knight
+    display_black: "♞"
+    display_white: "♘"
+  - !ruby/object:Bishop
+    pos:
+    - 3
+    - 8
+    team: white
+    type: bishop
+    display_black: "♝"
+    display_white: "♗"
+  - !ruby/object:Queen
+    pos:
+    - 4
+    - 8
+    team: white
+    type: queen
+    display_black: "♛"
+    display_white: "♕"
+  - !ruby/object:King
+    pos:
+    - 5
+    - 8
+    team: white
+    type: king
+    display_black: "♚"
+    display_white: "♔"
+  - !ruby/object:Bishop
+    pos:
+    - 6
+    - 8
+    team: white
+    type: bishop
+    display_black: "♝"
+    display_white: "♗"
+  - !ruby/object:Knight
+    pos:
+    - 7
+    - 8
+    team: white
+    type: knight
+    display_black: "♞"
+    display_white: "♘"
+  - !ruby/object:Rook
+    pos:
+    - 8
+    - 8
+    team: white
+    type: rook
+    display_black: "♜"
+    display_white: "♖"
+  - !ruby/object:Pawn
+    pos:
+    - 1
+    - 2
+    team: white
+    type: pawn
+    display_black: "♙"
+    display_white: "♙"
+    move_count: 0
+    direction: negative
+  - !ruby/object:Pawn
+    pos:
+    - 3
+    - 7
+    team: white
+    type: pawn
+    display_black: "♙"
+    display_white: "♙"
+    move_count: 0
+    direction: negative
+  - !ruby/object:Pawn
+    pos:
+    - 4
+    - 7
+    team: white
+    type: pawn
+    display_black: "♙"
+    display_white: "♙"
+    move_count: 0
+    direction: negative
+  - !ruby/object:Pawn
+    pos:
+    - 5
+    - 7
+    team: white
+    type: pawn
+    display_black: "♙"
+    display_white: "♙"
+    move_count: 0
+    direction: negative
+  - !ruby/object:Pawn
+    pos:
+    - 6
+    - 7
+    team: white
+    type: pawn
+    display_black: "♙"
+    display_white: "♙"
+    move_count: 0
+    direction: negative
+  - !ruby/object:Pawn
+    pos:
+    - 7
+    - 7
+    team: white
+    type: pawn
+    display_black: "♙"
+    display_white: "♙"
+    move_count: 0
+    direction: negative
+  - !ruby/object:Pawn
+    pos:
+    - 8
+    - 7
+    team: white
+    type: pawn
+    display_black: "♙"
+    display_white: "♙"
+    move_count: 0
+    direction: negative
+:turn_order:
+- white
+- black

@@ -1,13 +1,14 @@
 require_relative 'board'
 
 class Piece
-  attr_reader :pos, :team, :type
-  attr_writer :pos
+  attr_accessor :pos, :team, :type, :move_count
+  attr_reader :type
 
   def initialize(pos=[0,0], team='black')
     @pos = pos
     @team = team
     @type = 'undefined'
+    @move_count = 0
   end
 
   def announce
@@ -56,7 +57,6 @@ class Pawn < Piece
     @type = 'pawn'
     @display_black = "\u2659" #"\u265F"
     @display_white = "\u2659"
-    @move_count = 0
     @direction = (@pos[1] == 2) ? 'positive' : 'negative'
   end
 

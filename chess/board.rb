@@ -123,10 +123,49 @@ class Board
     if destination_occupant != nil
       return "#{destination_occupant.team} #{destination_occupant.type} already occupies space" if destination_occupant.team == moving_piece.team
       @pieces.delete(destination_occupant)
-      puts "Destroyed #{destination_occupant.team} #{destination_occupant.type}"
+      puts "Captured #{destination_occupant.team} #{destination_occupant.type}!"
     end
     moving_piece.pos = dest_loc
+    moving_piece.move_count += 1
+    promotion(moving_piece) if promotable?(moving_piece)
     return "good"
+  end
+
+  def promotable?(piece)
+    if piece.type == 'pawn'
+      if (piece.pos[1] == 1 and piece.team == 'white') or (piece.pos[1] == 8 and piece.team == 'black')
+        true
+      else
+        false
+      end
+    else
+      false
+    end
+  end
+
+  def promotion(piece)
+    puts "Promotion! Which piece would you like: (r)ook, (k)night, (b)ishop, (q)ueen?"
+    selected = nil
+    while selected.nil?
+      response = gets.chomp.upcase
+      case response
+      when 'R'
+        selected = Rook.new
+      when 'K'
+        selected = Knight.new
+      when 'B'
+        selected = Bishop.new
+      when 'Q'
+        selected = Queen.new
+      else
+        selected = false
+        puts "Try again"
+      end
+    end
+    selected.pos = piece.pos
+    selected.team = piece.team
+    @pieces << selected
+    @pieces.delete(piece)
   end
 
   def show_available_moves(piece, recursive=true)
