@@ -11,6 +11,7 @@
     type: rook
     display_black: "♜"
     display_white: "♖"
+    move_count: 0
   - !ruby/object:Knight
     pos:
     - 2
@@ -19,6 +20,7 @@
     type: knight
     display_black: "♞"
     display_white: "♘"
+    move_count: 0
   - !ruby/object:Bishop
     pos:
     - 3
@@ -27,6 +29,7 @@
     type: bishop
     display_black: "♝"
     display_white: "♗"
+    move_count: 0
   - !ruby/object:Queen
     pos:
     - 4
@@ -35,6 +38,7 @@
     type: queen
     display_black: "♛"
     display_white: "♕"
+    move_count: 0
   - !ruby/object:King
     pos:
     - 5
@@ -43,6 +47,7 @@
     type: king
     display_black: "♚"
     display_white: "♔"
+    move_count: 0
   - !ruby/object:Bishop
     pos:
     - 6
@@ -51,6 +56,7 @@
     type: bishop
     display_black: "♝"
     display_white: "♗"
+    move_count: 0
   - !ruby/object:Knight
     pos:
     - 7
@@ -59,6 +65,7 @@
     type: knight
     display_black: "♞"
     display_white: "♘"
+    move_count: 0
   - !ruby/object:Rook
     pos:
     - 8
@@ -67,6 +74,7 @@
     type: rook
     display_black: "♜"
     display_white: "♖"
+    move_count: 0
   - !ruby/object:Pawn
     pos:
     - 1
@@ -76,6 +84,7 @@
     display_black: "♙"
     display_white: "♙"
     direction: positive
+    move_count: 0
   - !ruby/object:Pawn
     pos:
     - 2
@@ -85,6 +94,7 @@
     display_black: "♙"
     display_white: "♙"
     direction: positive
+    move_count: 0
   - !ruby/object:Pawn
     pos:
     - 3
@@ -94,6 +104,7 @@
     display_black: "♙"
     display_white: "♙"
     direction: positive
+    move_count: 0
   - !ruby/object:Pawn
     pos:
     - 4
@@ -103,6 +114,7 @@
     display_black: "♙"
     display_white: "♙"
     direction: positive
+    move_count: 0
   - !ruby/object:Pawn
     pos:
     - 5
@@ -112,6 +124,7 @@
     display_black: "♙"
     display_white: "♙"
     direction: positive
+    move_count: 0
   - !ruby/object:Pawn
     pos:
     - 6
@@ -121,6 +134,7 @@
     display_black: "♙"
     display_white: "♙"
     direction: positive
+    move_count: 0
   - !ruby/object:Pawn
     pos:
     - 7
@@ -130,6 +144,7 @@
     display_black: "♙"
     display_white: "♙"
     direction: positive
+    move_count: 0
   - !ruby/object:Pawn
     pos:
     - 8
@@ -139,6 +154,7 @@
     display_black: "♙"
     display_white: "♙"
     direction: positive
+    move_count: 0
   - !ruby/object:Rook
     pos:
     - 1
@@ -147,6 +163,7 @@
     type: rook
     display_black: "♜"
     display_white: "♖"
+    move_count: 0
   - !ruby/object:Knight
     pos:
     - 2
@@ -155,6 +172,7 @@
     type: knight
     display_black: "♞"
     display_white: "♘"
+    move_count: 0
   - !ruby/object:Bishop
     pos:
     - 3
@@ -163,6 +181,7 @@
     type: bishop
     display_black: "♝"
     display_white: "♗"
+    move_count: 0
   - !ruby/object:Queen
     pos:
     - 4
@@ -171,6 +190,7 @@
     type: queen
     display_black: "♛"
     display_white: "♕"
+    move_count: 0
   - !ruby/object:King
     pos:
     - 5
@@ -179,6 +199,7 @@
     type: king
     display_black: "♚"
     display_white: "♔"
+    move_count: 0
   - !ruby/object:Bishop
     pos:
     - 6
@@ -187,6 +208,7 @@
     type: bishop
     display_black: "♝"
     display_white: "♗"
+    move_count: 0
   - !ruby/object:Knight
     pos:
     - 7
@@ -195,6 +217,7 @@
     type: knight
     display_black: "♞"
     display_white: "♘"
+    move_count: 0
   - !ruby/object:Rook
     pos:
     - 8
@@ -203,6 +226,7 @@
     type: rook
     display_black: "♜"
     display_white: "♖"
+    move_count: 0
   - !ruby/object:Pawn
     pos:
     - 1
@@ -212,6 +236,7 @@
     display_black: "♙"
     display_white: "♙"
     direction: negative
+    move_count: 0
   - !ruby/object:Pawn
     pos:
     - 2
@@ -221,6 +246,7 @@
     display_black: "♙"
     display_white: "♙"
     direction: negative
+    move_count: 0
   - !ruby/object:Pawn
     pos:
     - 3
@@ -230,6 +256,7 @@
     display_black: "♙"
     display_white: "♙"
     direction: negative
+    move_count: 0
   - !ruby/object:Pawn
     pos:
     - 4
@@ -239,6 +266,7 @@
     display_black: "♙"
     display_white: "♙"
     direction: negative
+    move_count: 0
   - !ruby/object:Pawn
     pos:
     - 5
@@ -248,6 +276,7 @@
     display_black: "♙"
     display_white: "♙"
     direction: negative
+    move_count: 0
   - !ruby/object:Pawn
     pos:
     - 6
@@ -257,6 +286,7 @@
     display_black: "♙"
     display_white: "♙"
     direction: negative
+    move_count: 0
   - !ruby/object:Pawn
     pos:
     - 7
@@ -266,6 +296,7 @@
     display_black: "♙"
     display_white: "♙"
     direction: negative
+    move_count: 0
   - !ruby/object:Pawn
     pos:
     - 8
@@ -275,6 +306,7 @@
     display_black: "♙"
     display_white: "♙"
     direction: negative
+    move_count: 0
 :turn_order:
 - white
 - black

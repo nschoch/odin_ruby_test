@@ -5,9 +5,11 @@ class Game
   def initialize
     @board = Board.new
     @save_file = 'chess_save.yaml'
+    @message_cache = ''
     puts "Let's play chess."
     @turn_order = ['white', 'black']
     load_save
+    system "clear"
     play
   end
 
@@ -15,17 +17,22 @@ class Game
     team_up = @turn_order[0]
     until @board.check_mate?(team_up)
       @board.show_board
+      if @message_cache != ''
+        puts @message_cache
+        @message_cache = ''
+      end
+      puts "Check #{team_up}!" if @board.check?(team_up)
       puts "#{team_up}'s turn"
       action = request_action
       system "clear"
       if action.nil?
-        puts "Try again"  
+        @message_cache = "Try again"  
       elsif action == 'Q'
-        puts "Saving and quitting"
+        @message_cache = "Saving and quitting"
         save_to_yaml
         exit
       elsif action == 'R'
-        puts "Resetting the board"
+        @message_cache = "Resetting the board"
         @board = Board.new
         @turn_order = ['white', 'black']
       else
@@ -35,11 +42,11 @@ class Game
           @turn_order << team_up
           team_up = @turn_order[0]
         else
-          puts "Error: #{result}"
+          @message_cache = "Error: #{result}"
         end
       end
     end
-    puts "Checkmate #{team_up}"
+    @message_cache = "Checkmate #{team_up}"
     @board.show_board
     remove_save
   end

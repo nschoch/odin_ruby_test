@@ -58,6 +58,7 @@ class Pawn < Piece
     @display_black = "\u2659" #"\u265F"
     @display_white = "\u2659"
     @direction = (@pos[1] == 2) ? 'positive' : 'negative'
+    @move_count = 0
   end
 
   def raw_moves(board)
@@ -98,6 +99,7 @@ class Rook < Piece
     @type = 'rook'
     @display_black = "\u265c"
     @display_white = "\u2656"
+    @move_count = 0
   end
 
   def raw_moves(board)
@@ -114,6 +116,7 @@ class Knight < Piece
     @type = 'knight'
     @display_black = "\u265e"
     @display_white = "\u2658"
+    @move_count = 0
   end
 
   def raw_moves(board)
@@ -137,6 +140,7 @@ class Bishop < Piece
     @type = 'bishop'
     @display_black = "\u265d"
     @display_white = "\u2657"
+    @move_count = 0
   end
 
   def raw_moves(board)
@@ -153,6 +157,7 @@ class Queen < Piece
     @type = 'queen'
     @display_black = "\u265b"
     @display_white = "\u2655"
+    @move_count = 0
   end
 
   def raw_moves(board)
@@ -169,6 +174,7 @@ class King < Piece
     @type = 'king'
     @display_black = "\u265a"
     @display_white = "\u2654"
+    @move_count = 0
   end
 
   def raw_moves(board)
